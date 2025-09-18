@@ -1,2 +1,3 @@
 # Practica-1-ADBD
-### Autores: Eric Bermúdez Hernández, Alba Pérez Rodríguez
+### Autores: Eric Bermúdez Hernández
+###          Alba Pérez Rodríguez
