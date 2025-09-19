@@ -111,4 +111,5 @@ El usuario usuario_biblio ha sido configurado con permisos exclusivamente de lec
   - `nombre`  
   - `nacionalidad`  
 
-
+**Comprobación de que la tabla se ha creado correctamente:**
+![tabla usuarios](img/tabla%20usuarios.png)
