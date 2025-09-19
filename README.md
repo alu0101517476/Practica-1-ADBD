@@ -80,6 +80,13 @@ GRANT lectores TO usuario_biblio;
 ### Consulta de usuarios
 - Consultar las tablas del sistema para listar todos los usuarios creados (`pg_roles`).  
 
+```sql
+SELECT *
+FROM pg_roles;
+
+```
+![consulta pg_roles](img/consulta_pg_roles.png)
+
 ### Cambio de contraseña
 - Cambiar la contraseña del usuario **usuario_biblio**.  
 
