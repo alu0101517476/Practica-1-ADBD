@@ -76,6 +76,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lectores;
 ```sql
 GRANT lectores TO usuario_biblio;
 ```
+![usuario_biblio en el rol lectores](img/usuario_biblio%20pertenece%20a%20lectores.png)
 
 ### Consulta de usuarios
 - Consultar las tablas del sistema para listar todos los usuarios creados (`pg_roles`).  
