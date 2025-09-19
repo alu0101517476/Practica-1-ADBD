@@ -59,8 +59,23 @@ Según la consulta realizada en la vista information_schema.role_table_grants, e
 ### Creación de roles
 - Crear un rol llamado **lectores** con permisos únicamente de consulta sobre todas las tablas de la base de datos.  
 
+```sql
+
+CREATE ROLE lectores;
+GRANT CONNECT ON DATABASE biblioteca TO lectores;
+GRANT USAGE ON SCHEMA public TO lectores;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO lectores;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lectores;
+
+```
+
+
 ### Asignación de roles
 - Asignar el usuario **usuario_biblio** al rol **lectores**.  
+
+```sql
+GRANT lectores TO usuario_biblio;
+```
 
 ### Consulta de usuarios
 - Consultar las tablas del sistema para listar todos los usuarios creados (`pg_roles`).  
