@@ -139,6 +139,7 @@ CREATE TABLE libros (
 ```
 
 **Comprobación de que la tabla se ha creado correctamente:**
+![tabla libros](img/tabla%20libros.png)
 
  Crear la tabla **prestamos** con los campos:  
   - `id_prestamo` (clave primaria)  
@@ -159,7 +160,7 @@ CREATE TABLE prestamos (
 ```
 
 **Comprobación de que la tabla se ha creado correctamente:**
-
+![tabla prestamos](img/tabla%20prestamos.png)
 
 --- 
 
