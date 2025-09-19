@@ -178,6 +178,7 @@ INSERT INTO autores (nombre, nacionalidad) VALUES
 ('Mario Vargas Llosa', 'Peruano');
 
 ```
+![Inserción autores](img/Inserción%20autores.png)
 
 
 ###  Libros.
@@ -194,6 +195,8 @@ INSERT INTO libros (titulo, año_publicacion, id_autor) VALUES
 ('Conversación en La Catedral', 1969, 5);
 
 ```
+![Inserción libros](img/Inserción%20libros.png)
+
 ### Préstamos.
 
 ```sql
@@ -205,11 +208,19 @@ INSERT INTO prestamos (id_libro, fecha_prestamo, fecha_devolucion, usuario_prest
 (7, '2025-09-09', NULL, 'Luis Fernández');
 
 ```
+![Inserción prestamo](img/Inserción%20prestamo.png)
 ---
 
 ## 6. Consultas Básicas
 
 - Listar todos los libros con su autor correspondiente.  
+```sql
+select libros.titulo, autores.nombre
+from libros, autores
+where libros.id_autor = autores.id_autor;
+```
+![Tabla primera consulta](img/Resultado%20primera%20consulta.png)
+
 - Mostrar los préstamos que aún no tienen fecha de devolución.  
 - Obtener los autores que tienen más de un libro registrado.
 
