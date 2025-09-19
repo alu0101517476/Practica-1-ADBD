@@ -169,10 +169,42 @@ CREATE TABLE prestamos (
 ### Autores (5 ejemplos)
 Insertar los autores en la tabla **autores**:
 
+```sql
+INSERT INTO autores (nombre, nacionalidad) VALUES
+('Gabriel García Márquez', 'Colombiana'),
+('J.K. Rowling', 'Británica'),
+('Isabel Allende', 'Chilena'),
+('George Orwell', 'Británico'),
+('Mario Vargas Llosa', 'Peruano');
+
+```
+
+
 ###  Libros.
 
+```sql
+INSERT INTO libros (titulo, año_publicacion, id_autor) VALUES
+('Cien Años de Soledad', 1967, 1),
+('Harry Potter y la Piedra Filosofal', 1997, 2),
+('Harry Potter y la Cámara Secreta', 1998, 2),
+('La Casa de los Espíritus', 1982, 3),
+('1984', 1949, 4),
+('Rebelión en la Granja', 1945, 4),
+('La Ciudad y los Perros', 1963, 5),
+('Conversación en La Catedral', 1969, 5);
+
+```
 ### Préstamos.
 
+```sql
+INSERT INTO prestamos (id_libro, fecha_prestamo, fecha_devolucion, usuario_prestatario) VALUES
+(1, '2025-09-01', '2025-09-10', 'Juan Pérez'),
+(2, '2025-09-03', '2025-09-15', 'María López'),
+(4, '2025-09-05', NULL, 'Carlos García'),
+(5, '2025-09-07', '2025-09-12', 'Ana Torres'),
+(7, '2025-09-09', NULL, 'Luis Fernández');
+
+```
 ---
 
 ## 6. Consultas Básicas
