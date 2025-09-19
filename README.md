@@ -25,6 +25,9 @@
 
 ## Creación de la Base de Datos
 
+``` sql
+create database biblioteca;
+``` 
 
 
 ---
@@ -34,7 +37,12 @@
 
 ### Creación de usuarios
 - Crear un usuario **admin_biblio** con permisos de administrador sobre la base de datos.  
+
+![nombre](img/admin_biblio.png)
+
 - Crear un usuario **usuario_biblio** con permisos solo de lectura.  
+
+
 
 ### Creación de roles
 - Crear un rol llamado **lectores** con permisos únicamente de consulta sobre todas las tablas de la base de datos.  
