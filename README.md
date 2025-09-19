@@ -38,10 +38,22 @@ create database biblioteca;
 ### Creación de usuarios
 - Crear un usuario **admin_biblio** con permisos de administrador sobre la base de datos.  
 
-![nombre](img/admin_biblio.png)
+![admin_biblio creado](img/admin_biblio.png)
 
 - Crear un usuario **usuario_biblio** con permisos solo de lectura.  
+*ERIC:*
+```sql
+CREATE USER usuario_biblio;
+GRANT USAGE ON SCHEMA public TO usuario_biblio;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT SELECT ON TABLES TO usuario_biblio;
+``` 
 
+**Captura de demostración que el usuario_biblio solo tiene permisos de lectura:**
+![usuario_biblio solo lectura](img/usuario_biblio%20lectura.png)
+
+**Explicación:**
+Según la consulta realizada en la vista information_schema.role_table_grants, el usuario usuario_biblio no presenta ningún privilegio asignado sobre las tablas de la base de datos. Esto significa que actualmente no puede ejecutar operaciones de lectura ni de escritura. Por tanto, no se le pueden atribuir permisos de solo lectura, ya que en realidad no dispone de acceso alguno a los objetos de la base de datos.
 
 
 ### Creación de roles
