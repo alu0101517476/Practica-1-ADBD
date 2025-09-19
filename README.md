@@ -111,6 +111,14 @@ El usuario usuario_biblio ha sido configurado con permisos exclusivamente de lec
   - `nombre`  
   - `nacionalidad`  
 
+```sql
+CREATE TABLE autores (
+    id_autor SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    nacionalidad VARCHAR(50)
+);
+```
+
 **Comprobación de que la tabla se ha creado correctamente:**
 ![tabla usuarios](img/tabla%20usuarios.png)
 
@@ -120,6 +128,16 @@ El usuario usuario_biblio ha sido configurado con permisos exclusivamente de lec
   - `año_publicacion`  
   - `id_autor` (clave foránea hacia `autores`)  
 
+```sql
+CREATE TABLE libros (
+    id_libro SERIAL PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    año_publicacion INT,
+    id_autor INT NOT NULL,
+    CONSTRAINT fk_autor FOREIGN KEY (id_autor) REFERENCES autores(id_autor)
+);
+```
+
 **Comprobación de que la tabla se ha creado correctamente:**
 
  Crear la tabla **prestamos** con los campos:  
@@ -128,6 +146,17 @@ El usuario usuario_biblio ha sido configurado con permisos exclusivamente de lec
   - `fecha_prestamo`  
   - `fecha_devolucion`  
   - `usuario_prestatario`  
+
+```sql
+CREATE TABLE prestamos (
+    id_prestamo SERIAL PRIMARY KEY,
+    id_libro INT NOT NULL,
+    fecha_prestamo DATE NOT NULL,
+    fecha_devolucion DATE,
+    usuario_prestatario VARCHAR(100) NOT NULL,
+    CONSTRAINT fk_libro FOREIGN KEY (id_libro) REFERENCES libros(id_libro)
+);
+```
 
 **Comprobación de que la tabla se ha creado correctamente:**
 
