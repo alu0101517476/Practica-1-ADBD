@@ -90,8 +90,17 @@ FROM pg_roles;
 ### Cambio de contraseña
 - Cambiar la contraseña del usuario **usuario_biblio**.  
 
+```sql
+ALTER USER usuario_biblio WITH PASSWORD '1234';
+
+```
+![Cambio contraseña](img/Cambio_contrasenia.png)
+
+
 ### Restricciones de permisos
 - Configurar permisos de tal forma que el usuario **usuario_biblio** no pueda eliminar registros en ninguna tabla.  
+
+El usuario usuario_biblio ha sido configurado con permisos exclusivamente de lectura sobre la base de datos biblioteca. Esto se logró concediéndole la capacidad de conectarse a la base de datos, de acceder al esquema público donde se encuentran las tablas y de ejecutar únicamente consultas de tipo SELECT sobre todas las tablas existentes. Además, se configuró de manera que cualquier tabla que se cree en el futuro también le permita únicamente la lectura de datos. Como resultado, usuario_biblio puede consultar toda la información de la base de datos, pero cualquier intento de modificar, insertar o eliminar registros será denegado automáticamente, garantizando que este usuario cumpla estrictamente con la restricción de no poder eliminar registros en ninguna tabla.
 
 ---
 
