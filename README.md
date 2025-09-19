@@ -17,13 +17,13 @@
 
 ---
 
-## Introducción
+## 1. Introducción
 
 
 ---
 
 
-## Creación de la Base de Datos
+## 2. Creación de la Base de Datos
 
 ``` sql
 create database biblioteca;
@@ -33,7 +33,7 @@ create database biblioteca;
 ---
 
 
-## Gestión de Usuarios y Roles
+## 3. Gestión de Usuarios y Roles
 
 ### Creación de usuarios
 - Crear un usuario **admin_biblio** con permisos de administrador sobre la base de datos.  
@@ -105,7 +105,7 @@ El usuario usuario_biblio ha sido configurado con permisos exclusivamente de lec
 
 ---
 
-## Creación de Tablas
+## 4. Creación de Tablas
 - Crear la tabla **autores** con los campos:  
   - `id_autor` (clave primaria)  
   - `nombre`  
@@ -113,3 +113,80 @@ El usuario usuario_biblio ha sido configurado con permisos exclusivamente de lec
 
 **Comprobación de que la tabla se ha creado correctamente:**
 ![tabla usuarios](img/tabla%20usuarios.png)
+
+- Crear la tabla **libros** con los campos:  
+  - `id_libro` (clave primaria)  
+  - `titulo`  
+  - `año_publicacion`  
+  - `id_autor` (clave foránea hacia `autores`)  
+
+**Comprobación de que la tabla se ha creado correctamente:**
+
+ Crear la tabla **prestamos** con los campos:  
+  - `id_prestamo` (clave primaria)  
+  - `id_libro` (clave foránea hacia `libros`)  
+  - `fecha_prestamo`  
+  - `fecha_devolucion`  
+  - `usuario_prestatario`  
+
+**Comprobación de que la tabla se ha creado correctamente:**
+
+
+--- 
+
+## 5. Inserción de Datos
+
+### Autores (5 ejemplos)
+Insertar los autores en la tabla **autores**:
+
+###  Libros.
+
+### Préstamos.
+
+---
+
+## 6. Consultas Básicas
+
+- Listar todos los libros con su autor correspondiente.  
+- Mostrar los préstamos que aún no tienen fecha de devolución.  
+- Obtener los autores que tienen más de un libro registrado.
+
+
+---
+
+## 7. Consultas con Agregación
+
+- Calcular el número total de préstamos realizados.  
+- Obtener el número de libros prestados por cada usuario.
+
+--- 
+
+
+## 8. Modificación de Datos
+
+- Actualizar la fecha de devolución de un préstamo pendiente.  
+- Eliminar un libro y comprobar el efecto en la tabla de préstamos (usar ON DELETE CASCADE o justificar el comportamiento).
+
+---
+
+
+## 9. Creación de Vistas
+
+- Crear una vista llamada `vista_libros_prestados` que muestre: título del libro, autor y nombre del prestatario.  
+- Conceder permisos de consulta sobre esta vista únicamente a `usuario_biblio`.
+
+---
+
+## 10. Funciones y Consultas Avanzadas
+
+- Crear una función que reciba el nombre de un autor y devuelva todos los libros escritos por él.  
+- Crear una consulta que devuelva los tres libros más prestados.
+
+---
+
+## 11. Exportación e Importación de Datos
+
+- Exportar el contenido de la tabla `libros` a un archivo CSV.  
+- Importar datos adicionales de autores desde un archivo CSV externo.
+
+---
