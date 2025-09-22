@@ -18,7 +18,7 @@
 ---
 
 ## 1. Introducción
-
+En esta práctica comprenderemos y aplicaremos las operaciones fundamentales de administración y manejo de datos en PostgreSQL, incluyendo la creación de usuarios, tablas, vistas y funciones. Además, desarrollaremos nuestras habilidades en la elaboración de consultas SQL básicas y avanzadas, aplicando criterios de filtrado, agregación y relaciones entre tablas en un contexto realista.
 
 ---
 
@@ -41,7 +41,6 @@ create database biblioteca;
 ![admin_biblio creado](img/admin_biblio.png)
 
 - Crear un usuario **usuario_biblio** con permisos solo de lectura.  
-*ERIC:*
 ```sql
 CREATE USER usuario_biblio;
 GRANT USAGE ON SCHEMA public TO usuario_biblio;
@@ -254,40 +253,171 @@ HAVING COUNT(libros.id_libro) > 1;
 SELECT COUNT(*) AS total_prestamos
 FROM prestamos;
 ```
-![tabla que muestra todos los prestamos](img/PRESTAMO.png)
+![tabla que muestra todos los prestamos](img/PRESTAMOS.png)
 ![tabla que muestra todos los prestamos](img/Prestamos_totales.png)
 
 
 - Obtener el número de libros prestados por cada usuario.
+```sql
+SELECT usuario_prestatario, COUNT(*) AS total_libros_prestados
+FROM prestamos
+GROUP BY usuario_prestatario;
 
+```
+![tabla que muestra el número de libros prestados](img/Libros_prestados.png)
 --- 
 
 
 ## 8. Modificación de Datos
 
 - Actualizar la fecha de devolución de un préstamo pendiente.  
+
+```sql
+UPDATE prestamos
+SET fecha_devolucion = '2025-09-20'
+WHERE id_prestamo = 3;
+```
+![tabla que muestra el número de prestamos pendientes](img/prestamos_pendientes.png)
+![tabla que muestra el comando de actualizacion de fecha](img/Actualizar_fecha_prestamo.png)
+![tabla que muestra el cambio de fecha](img/Fecha_cambiada.png)
+
 - Eliminar un libro y comprobar el efecto en la tabla de préstamos (usar ON DELETE CASCADE o justificar el comportamiento).
 
----
+```sql
+DELETE FROM prestamos
+WHERE id_libro = 5;
 
+DELETE FROM libros
+WHERE id_libro = 5;
+
+ALTER TABLE prestamos DROP CONSTRAINT prestamos_id_libro_fkey;
+
+ALTER TABLE prestamos
+ADD CONSTRAINT prestamos_id_libro_fkey
+FOREIGN KEY (id_libro) REFERENCES libros(id_libro)
+ON DELETE CASCADE;
+
+```
+Comporbamos con **SELECT * FROM prestamos WHERE id_libro = 5;**
+
+![tabla que muestra la eliminacion del usuario](img/Delete_cascade.png)
+![tabla que muestra el cambio de fecha](img/delete_cascade_comprobacion.png)
+
+---
 
 ## 9. Creación de Vistas
 
 - Crear una vista llamada `vista_libros_prestados` que muestre: título del libro, autor y nombre del prestatario.  
-- Conceder permisos de consulta sobre esta vista únicamente a `usuario_biblio`.
 
+```sql
+CREATE VIEW vista_libros_prestados AS
+SELECT l.titulo, a.nombre AS autor, p.usuario_prestatario
+FROM libros l
+JOIN autores a ON l.id_autor = a.id_autor
+JOIN prestamos p ON l.id_libro = p.id_libro;
+
+```
+![tabla que muestra la eliminacion del usuario](img/Creacion_vista.png)
+
+- Conceder permisos de consulta sobre esta vista únicamente a `usuario_biblio`.
+```sql
+GRANT SELECT ON vista_libros_prestados TO usuario_biblio;
+```
+![tabla que muestra la eliminacion del usuario](img/Permisos_vista.png)
+![Vista libros prestados](img/Vista_libros_prestados.png)
 ---
 
 ## 10. Funciones y Consultas Avanzadas
 
 - Crear una función que reciba el nombre de un autor y devuelva todos los libros escritos por él.  
+```sql
+CREATE OR REPLACE FUNCTION libros_por_autor(nombre_autor VARCHAR)
+RETURNS TABLE(titulo_libro VARCHAR, año_publicacion INT) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT l.titulo, l.año_publicacion
+    FROM libros l
+    JOIN autores a ON l.id_autor = a.id_autor
+    WHERE a.nombre = nombre_autor;
+END;
+$$ LANGUAGE plpgsql;
+
+```
+```sql
+SELECT * FROM libros_por_autor('J.K. Rowling');
+```
+![Creacion funcion](img/Funcion_postgre.png)
+![Comprobacion funcion](img/Comprobacion_funcion.png)
+
 - Crear una consulta que devuelva los tres libros más prestados.
 
+```sql
+SELECT l.titulo, COUNT(p.id_prestamo) AS veces_prestado
+FROM libros l
+JOIN prestamos p ON l.id_libro = p.id_libro
+GROUP BY l.titulo
+ORDER BY veces_prestado DESC
+LIMIT 3;
+```
+Añadimos más préstamos para que se vea de manera más clara cuales son los 3 libros más prestados:
+
+```sql
+-- Libro 1(Cien Años de Soledad) prestado 5 veces
+INSERT INTO prestamos (id_libro, fecha_prestamo, fecha_devolucion, usuario_prestatario) VALUES
+(1, '2025-09-01', '2025-09-05', 'Juan Pérez'),
+(1, '2025-09-06', '2025-09-10', 'María López'),
+(1, '2025-09-11', '2025-09-15', 'Carlos García'),
+(1, '2025-09-16', '2025-09-20', 'Ana Torres'),
+(1, '2025-09-21', '2025-09-25', 'Luis Fernández');
+
+-- Libro 2(Harry Potter y la Piedra Filosofal) prestado 3 veces
+INSERT INTO prestamos (id_libro, fecha_prestamo, fecha_devolucion, usuario_prestatario) VALUES
+(2, '2025-09-02', '2025-09-06', 'Juan Pérez'),
+(2, '2025-09-07', '2025-09-11', 'María López'),
+(2, '2025-09-12', '2025-09-16', 'Carlos García');
+
+-- Libro 3(Harry Potter y la Cámara Secreta) prestado 2 veces
+INSERT INTO prestamos (id_libro, fecha_prestamo, fecha_devolucion, usuario_prestatario) VALUES
+(3, '2025-09-03', '2025-09-07', 'Ana Torres'),
+(3, '2025-09-08', '2025-09-12', 'Luis Fernández');
+
+-- Libro 4(La Casa de los Espíritus) prestado 1 vez
+INSERT INTO prestamos (id_libro, fecha_prestamo, fecha_devolucion, usuario_prestatario) VALUES
+(4, '2025-09-04', '2025-09-08', 'Juan Pérez');
+
+-- Libro 5(1984) prestado 1 vez
+INSERT INTO prestamos (id_libro, fecha_prestamo, fecha_devolucion, usuario_prestatario) VALUES
+(5, '2025-09-05', '2025-09-09', 'María López');
+
+```
+![TOP3](img/TOP3.png)
 ---
 
 ## 11. Exportación e Importación de Datos
 
 - Exportar el contenido de la tabla `libros` a un archivo CSV.  
+
+```sql
+\copy libros TO '/tmp/libros.csv' CSV HEADER;
+```
+
+![Copia](img/export.png)
+![Contenido](img/contenido.png)
+
 - Importar datos adicionales de autores desde un archivo CSV externo.
+
+Creamos un archivo .csv denominado autores.csv e incluimmos lo siguiente:
+nombre,nacionalidad
+Leo Tolstoy,Rusa
+Jane Austen,Británica
+Homer,Griega
+
+```sql
+postgres=# \copy autores(nombre, nacionalidad)
+FROM '/tmp/autores.csv' CSV HEADER;
+```
+
+![Copia](img/import.png)
+![Contenido](img/Comporbacion_import.png)
 
 ---
