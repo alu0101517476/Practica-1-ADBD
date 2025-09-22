@@ -222,9 +222,29 @@ where libros.id_autor = autores.id_autor;
 ![Tabla primera consulta](img/Resultado%20primera%20consulta.png)
 
 - Mostrar los préstamos que aún no tienen fecha de devolución.  
+
+```sql
+SELECT prestamos.id_prestamo, libros.titulo, prestamos.usuario_prestatario
+FROM prestamos, libros
+WHERE prestamos.id_libro = libros.id_libro
+AND prestamos.fecha_devolucion IS NULL;
+
+```
+![tabla que muestra prestamos](img/prestamos_null.png)
+![tabla que muestra null](img/prestamos_null_1.png)
+
 - Obtener los autores que tienen más de un libro registrado.
 
+```sql
+SELECT autores.nombre, COUNT(libros.id_libro) AS total_libros
+FROM autores, libros
+WHERE autores.id_autor = libros.id_autor
+GROUP BY autores.nombre
+HAVING COUNT(libros.id_libro) > 1;
 
+```
+![tabla que muestra libros](img/Autores_conteo.png)
+![tabla que muestra null](img/Autores_conteo_2.png)
 ---
 
 ## 7. Consultas con Agregación
