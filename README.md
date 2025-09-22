@@ -250,6 +250,14 @@ HAVING COUNT(libros.id_libro) > 1;
 ## 7. Consultas con Agregación
 
 - Calcular el número total de préstamos realizados.  
+```sql
+SELECT COUNT(*) AS total_prestamos
+FROM prestamos;
+```
+![tabla que muestra todos los prestamos](img/PRESTAMO.png)
+![tabla que muestra todos los prestamos](img/Prestamos_totales.png)
+
+
 - Obtener el número de libros prestados por cada usuario.
 
 --- 
