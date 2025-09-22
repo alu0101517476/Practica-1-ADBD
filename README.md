@@ -510,7 +510,7 @@ postgres=# \copy autores(nombre, nacionalidad)
 FROM '/tmp/autores.csv' CSV HEADER;
 ```
 
-![Copia](img/import.png)
+![Copia](img/Import.png)
 ![Contenido](img/Comporbacion_import.png)
 
 
