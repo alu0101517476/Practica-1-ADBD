@@ -512,7 +512,9 @@ FROM '/tmp/autores.csv' CSV HEADER;
 ![Copia](img/import.png)
 ![Contenido](img/Comporbacion_import.png)
 
+
 El comando `\copy` permite importar datos desde un archivo CSV al cliente PostgreSQL.  
 Se especifican las columnas de destino (`nombre` y `nacionalidad`) y se indica que el archivo incluye una fila de encabezado (`CSV HEADER`).  
 Esto agrega los autores del archivo externo a la tabla `autores` de manera rápida y sencilla.
+
 ---
