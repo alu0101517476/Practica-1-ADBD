@@ -50,6 +50,7 @@ Para comenzar con la práctica, se procede a crear la base de datos que almacena
 create database biblioteca;
 ``` 
 Se crea una base de datos llamada `biblioteca` que servirá como contenedor principal para todas las tablas y datos relacionados con la gestión de autores, libros y préstamos. Esto permite organizar la información de manera centralizada y controlada dentro del sistema PostgreSQL.
+
 ---
 
 ## 3. Gestión de Usuarios y Roles
