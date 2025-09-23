@@ -57,7 +57,10 @@ Esta consulta crea una base de datos llamada `biblioteca` que servirá como cont
 
 ### Creación de usuarios
 - Crear un usuario **admin_biblio** con permisos de administrador sobre la base de datos.  
-
+```sql
+create user admin_biblio with superuser
+```
+En la siguiente imagen se puede apreciar como el usuario admin_biblio tiene los permisos de superusuario marcados en la tabla con la `[V]`
 ![admin_biblio creado](img/admin_biblio.png)
 
 Se crea un usuario llamado `admin_biblio` con permisos de superusuario. Esto significa que puede administrar completamente la base de datos `biblioteca`, incluyendo la creación de tablas, gestión de roles y usuarios, y ejecución de cualquier operación sobre los datos.
