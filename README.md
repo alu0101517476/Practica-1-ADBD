@@ -44,12 +44,12 @@ En esta práctica comprenderemos y aplicaremos las operaciones fundamentales de 
 ---
 
 ## 2. Creación de la Base de Datos
-Para comenzar con la práctica, se procede a crear la base de datos que almacenará toda la información de la biblioteca. La instrucción SQL utilizada es la siguiente:
+Para comenzar con la práctica, se procede a crear la base de datos que almacenará toda la información de la biblioteca. La consulta SQL utilizada es la siguiente:
 
 ``` sql
 create database biblioteca;
 ``` 
-Se crea una base de datos llamada `biblioteca` que servirá como contenedor principal para todas las tablas y datos relacionados con la gestión de autores, libros y préstamos. Esto permite organizar la información de manera centralizada y controlada dentro del sistema PostgreSQL.
+Esta consulta crea una base de datos llamada `biblioteca` que servirá como contenedor principal para todas las tablas y datos relacionados con la gestión de autores, libros y préstamos. Esto permite organizar la información de manera centralizada y controlada dentro del sistema PostgreSQL.
 
 ---
 
