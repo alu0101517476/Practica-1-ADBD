@@ -437,6 +437,7 @@ JOIN prestamos p ON l.id_libro = p.id_libro;
 ```
 
 Como vemos en la siguiente imagen, la vista se ha creado correctamente:
+
 ![tabla que muestra la eliminacion del usuario](img/Creacion_vista.png)
 
 La vista `vista_libros_prestados` combina la información de las tablas `libros`, `autores` y `prestamos`.  
@@ -528,6 +529,7 @@ INSERT INTO prestamos (id_libro, fecha_prestamo, fecha_devolucion, usuario_prest
 ```
 
 Resultado de la consulta:
+
 ![TOP3](img/TOP3.png)
 
 La consulta utiliza `JOIN` entre `libros` y `prestamos`, agrupa por título de libro, cuenta cuántas veces ha sido prestado (`COUNT`) y ordena los resultados en orden descendente (`ORDER BY`).  
