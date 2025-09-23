@@ -57,15 +57,18 @@ Esta consulta crea una base de datos llamada `biblioteca` que servirá como cont
 
 ### Creación de usuarios
 - Crear un usuario **admin_biblio** con permisos de administrador sobre la base de datos.  
+
+La consulta SQL para realizar la tarea es la siguiente:
 ```sql
 create user admin_biblio with superuser
 ```
-En la siguiente imagen se puede apreciar como el usuario admin_biblio tiene los permisos de superusuario marcados en la tabla con la `[V]`
 ![admin_biblio creado](img/admin_biblio.png)
 
-Se crea un usuario llamado `admin_biblio` con permisos de superusuario. Esto significa que puede administrar completamente la base de datos `biblioteca`, incluyendo la creación de tablas, gestión de roles y usuarios, y ejecución de cualquier operación sobre los datos.
+Como se aprecia en la imagen, se crea el usuario admin_biblio y este tiene los permisos de superusuario marcados en la tabla con la `[V]`. Esto significa que puede administrar completamente la base de datos `biblioteca`, incluyendo la creación de tablas, gestión de roles, usuarios, y ejecución de cualquier operación sobre los datos.
 
-- Crear un usuario **usuario_biblio** con permisos solo de lectura.  
+- Crear un usuario **usuario_biblio** con permisos solo de lectura. 
+
+La consulta SQL utilizada es la siguiente:
 ```sql
 CREATE USER usuario_biblio;
 GRANT USAGE ON SCHEMA public TO usuario_biblio;
@@ -73,15 +76,15 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
 GRANT SELECT ON TABLES TO usuario_biblio;
 ``` 
 
-**Captura de demostración que el usuario_biblio solo tiene permisos de lectura:**
+Captura de demostración que el usuario_biblio solo tiene permisos de lectura:
 ![usuario_biblio solo lectura](img/usuario_biblio%20lectura.png)
 
-**Explicación:**
-Según la consulta realizada en la vista information_schema.role_table_grants, el usuario usuario_biblio no presenta ningún privilegio asignado sobre las tablas existentes de la base de datos. Esto significa que actualmente no puede ejecutar operaciones de lectura ni de escritura sobre esas tablas. Por tanto, aunque se configure ALTER DEFAULT PRIVILEGES para futuras tablas, el usuario no tiene acceso a los objetos existentes hasta que se le otorguen explícitamente los permisos necesarios.
+Como se puede ver, según la consulta realizada en la vista information_schema.role_table_grants, el usuario usuario_biblio no presenta ningún privilegio asignado sobre las tablas existentes de la base de datos. Esto significa que actualmente no puede ejecutar operaciones de lectura ni de escritura sobre esas tablas. Por tanto, aunque se configure ALTER DEFAULT PRIVILEGES para futuras tablas, el usuario no tiene acceso a los objetos existentes hasta que se le otorguen explícitamente los permisos necesarios.
 
 ### Creación de roles
 - Crear un rol llamado **lectores** con permisos únicamente de consulta sobre todas las tablas de la base de datos.  
 
+Consulta SQL:
 ```sql
 CREATE ROLE lectores;
 GRANT CONNECT ON DATABASE biblioteca TO lectores;
@@ -90,7 +93,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO lectores;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lectores;
 ```
 
-Los comandos permiten crear un rol llamado `lectores` y configurarlo con permisos únicamente de consulta sobre todas las tablas de la base de datos `biblioteca`. Primero, `CREATE ROLE lectores` crea el rol. Luego, `GRANT CONNECT ON DATABASE biblioteca TO lectores` permite que el rol se conecte a la base de datos, y `GRANT USAGE ON SCHEMA public TO lectores` le da acceso al esquema público. A continuación, `GRANT SELECT ON ALL TABLES IN SCHEMA public TO lectores` concede permisos de solo lectura sobre todas las tablas existentes, y `ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lectores` asegura que cualquier tabla creada en el futuro también sea accesible únicamente en modo lectura para los miembros de este rol.
+Los comandos permiten crear un rol llamado **lectores** y configurarlo con permisos únicamente de consulta sobre todas las tablas de la base de datos **biblioteca**. Primero, **CREATE ROLE lectores** crea el rol. Luego, **GRANT CONNECT ON DATABASE biblioteca TO lectores** permite que el rol se conecte a la base de datos, y **GRANT USAGE ON SCHEMA public TO lectores** le da acceso al esquema público. A continuación, **GRANT SELECT ON ALL TABLES IN SCHEMA public TO lectores** concede permisos de solo lectura sobre todas las tablas existentes, y **ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lectores** asegura que cualquier tabla creada en el futuro también sea accesible únicamente en modo lectura para los miembros de este rol.
 
 
 ### Asignación de roles
