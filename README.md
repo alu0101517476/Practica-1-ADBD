@@ -364,6 +364,7 @@ Esta consulta agrupa los registros de la tabla `prestamos` por `usuario_prestata
 El resultado muestra, de manera clara, el total de préstamos asociados a cada usuario registrado en la biblioteca.
 
 Resultado de la consulta:
+
 ![tabla que muestra el número de libros prestados](img/Libros_prestados.png)
 
 
