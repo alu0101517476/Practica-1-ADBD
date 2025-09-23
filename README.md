@@ -384,9 +384,11 @@ Esta consulta actualiza el registro del préstamo con `id_prestamo = 3` en la ta
 Esto permite marcar que un libro previamente pendiente ha sido devuelto, manteniendo la información de los préstamos al día.
 
 En la siguiente imagen se muestra el número de prestamos pendientes, los cuales son 2, los que tienen como valor NULL en la fecha_devolucion
+
 ![tabla que muestra el número de prestamos pendientes](img/prestamos_pendientes.png)
 
 Tabla después de realizar el cambio indicado en la consulta:
+
 ![tabla que muestra el cambio de fecha](img/Fecha_cambiada.png)
 
 
